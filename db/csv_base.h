@@ -16,4 +16,7 @@ typedef struct
 // After this call, the structure is reset to safe empty values.
 void freeCSV(CSV *db);
 
+// Basic information.
+void printStats(const char *filename, const CSV *db);
+
 #endif

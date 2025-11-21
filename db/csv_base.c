@@ -36,3 +36,12 @@ void freeCSV(CSV *db)
     db->headers = NULL;
     db->rows = NULL;
 }
+
+void printStats(const char *filename, const CSV *db)
+{
+    if (!db) return;
+
+    printf("File: %s\n", filename);
+    printf("Columns: %zu\n", db->column_count);
+    printf("Rows: %zu\n", db->row_count);
+}

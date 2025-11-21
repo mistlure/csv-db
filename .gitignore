@@ -1,3 +1,6 @@
+# Ignore VSCode settings
+.vscode/
+
 # Object files
 *.o
 
