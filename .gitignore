@@ -1,0 +1,26 @@
+# Object files
+*.o
+
+# Compiled binaries / executables
+*.out
+*.exe
+*.bin
+*.elf
+
+# Libraries
+*.a
+*.so
+*.dll
+
+# Build directories (если будешь собирать в отдельную папку)
+build/
+dist/
+
+# Debug / temp files
+*.log
+*.tmp
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db

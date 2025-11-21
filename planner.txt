@@ -1,0 +1,5 @@
+1. confirm function. rewriting input csv file
+2. --help or -h
+3. interface
+4. better file structure
+5. 
