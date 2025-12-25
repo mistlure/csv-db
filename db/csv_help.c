@@ -7,19 +7,20 @@
 
 char **splitLine(const char *line, const char *delimiters, size_t *count)
 {
-    // Default delimiter value.
+    // Default delimiter value
     if (!delimiters) delimiters = ",";
 
     char **parts = NULL;
     size_t used = 0;
     const char *p = line;
 
-    while (*p)
+    int loop = 1; 
+
+    while (*p || loop)
     {
-        // Skip delimiter characters.
-        while (*p && strchr(delimiters, *p))
+        if (!*p)
         {
-            p++;
+            loop = 0;
         }
 
         const char *startToken = p;
@@ -39,11 +40,8 @@ char **splitLine(const char *line, const char *delimiters, size_t *count)
             return NULL;
         }
 
-        // Copy token characters into new string.
         memcpy(token, startToken, lenToken);
         token[lenToken] = '\0';
-
-
 
         for (size_t k = 0; k < lenToken; k++)
         {
@@ -54,21 +52,33 @@ char **splitLine(const char *line, const char *delimiters, size_t *count)
             }
         }
 
-
-
-        // Expand array to hold one more token.
         char **tmp = realloc(parts, (used + 1) * sizeof(char *));
         if (!tmp)
         {
-            for (size_t i = 0; i < used; i++) free(parts[i]);
+            for (size_t i = 0; i < used; i++)
+            {
+                free(parts[i]);
+            }
+
             free(parts);
             free(token);
             return NULL;
         }
-        parts = tmp;
 
+        parts = tmp;
         parts[used++] = token;
+
+        if (*p) 
+        {
+            p++; 
+        }
+        else 
+        {
+            loop = 0; 
+        }
     }
+
     *count = used;
+
     return parts;
 }

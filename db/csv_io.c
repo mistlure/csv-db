@@ -47,6 +47,12 @@ int loadCSVFile(const char *filename, CSV *db)
             return 1;
         }
 
+        if (col_count == 0) 
+        {
+            free(row);
+            continue;
+        }
+
         if (col_count != db->column_count)
         {
             fprintf(stderr, "Warning: row has %zu columns, expected %zu\n",
