@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "args.h"
 #include "csv_base.h"
+#include "csv_io.h"
+#include "csv_math.h"
 
 int main(int argc, char **argv)
 {
@@ -34,12 +37,15 @@ int main(int argc, char **argv)
             break;
         }
 
+
         buffer[strcspn(buffer, "\n")] = 0;
+
 
         char *cmd = strtok(buffer, " ");
         if (!cmd) continue;
 
 
+        char *arg = strtok(NULL, " ");
 
         if (strcmp(cmd, "exit") == 0)
         {
@@ -50,13 +56,26 @@ int main(int argc, char **argv)
             }
             break;
         }
+        else if (strcmp(cmd, "average") == 0)
+        {
+            avgF(&db, arg);
+        }
+        else if (strcmp(cmd, "sum") == 0)
+        {
+            sumF(&db, arg);
+        }
+        else if (strcmp(cmd, "min") == 0)
+        {
+            minF(&db, arg);
+        }
+        else if (strcmp(cmd, "max") == 0)
+        {
+            maxF(&db, arg);
+        }
         else
         {
             printf("Undefined '%s' command.\n", cmd);
         }
-
-        
-
     }
 
     ///

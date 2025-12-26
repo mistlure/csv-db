@@ -82,3 +82,41 @@ char **splitLine(const char *line, const char *delimiters, size_t *count)
 
     return parts;
 }
+
+int getColumnIndex(const CSV *db, const char *columnName)
+{
+    if (!db || !db->headers || !columnName)
+    {
+        return -1;
+    }
+
+    for (size_t i = 0; i < db->column_count; i++)
+    {
+        if (strcmp(db->headers[i], columnName) == 0)
+        {
+            return (int)i;
+        }
+    }
+    return -1; // Column not found
+}
+
+double stringToDouble(const char *string)
+{
+    if (!string)
+    {
+        return 0.0;
+    }
+    
+    char *endptr;
+    
+    // strtod parses a double from a string
+    double value = strtod(string, &endptr);
+    
+    // If no conversion was performed (string is just text like "abc"), return 0.0
+    if (string == endptr) 
+    {
+        return 0.0;
+    }
+    
+    return value;
+}
