@@ -7,4 +7,9 @@
 // 'data' is a comma-separated string (e.g. "Jan,Novak,20")
 void addRow(CSV *db, const char *data);
 
+// Adds a new column.
+// 'colName' is the new header name.
+// 'data' is comma-separated values for each row (e.g. "10,20,30").
+void addCol(CSV *db, const char *colName, const char *data);
+
 #endif

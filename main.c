@@ -47,6 +47,8 @@ int main(int argc, char **argv)
 
 
         char *arg = strtok(NULL, " ");
+        char *val = strtok(NULL, "");
+        if (val && *val == ' ') val++;
 
         if (strcmp(cmd, "exit") == 0)
         {
@@ -76,6 +78,10 @@ int main(int argc, char **argv)
         else if (strcmp(cmd, "addrow") == 0)
         {
             addRow(&db, arg);
+        }
+        else if (strcmp(cmd, "addcol") == 0)
+        {
+            addCol(&db, arg, val);
         }
         else
         {
