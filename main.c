@@ -6,6 +6,7 @@
 #include "csv_base.h"
 #include "csv_io.h"
 #include "csv_math.h"
+#include "csv_edit.h"
 
 int main(int argc, char **argv)
 {
@@ -71,6 +72,10 @@ int main(int argc, char **argv)
         else if (strcmp(cmd, "max") == 0)
         {
             maxF(&db, arg);
+        }
+        else if (strcmp(cmd, "addrow") == 0)
+        {
+            addRow(&db, arg);
         }
         else
         {
