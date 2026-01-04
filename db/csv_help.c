@@ -120,3 +120,54 @@ double stringToDouble(const char *string)
     
     return value;
 }
+
+void clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+void printHeader(const char *in, const char *out) {
+    printf(COLOR_CYAN "============================================================\n" COLOR_RESET);
+    printf(STYLE_BOLD "                         CSV DATABASE                       \n" COLOR_RESET);
+    printf(COLOR_CYAN "============================================================\n" COLOR_RESET);
+    printf(" " STYLE_BOLD "INPUT FILE :" COLOR_RESET " %s\n", in);
+    printf(" " STYLE_BOLD "OUTPUT FILE:" COLOR_RESET " %s\n", out);
+    printf(COLOR_CYAN "============================================================\n" COLOR_RESET);
+}
+
+void printHelp() {
+    printf("\n" COLOR_MAGENTA "--- AVAILABLE COMMANDS ---" COLOR_RESET "\n");
+    printf(COLOR_YELLOW "  average <col>" COLOR_RESET "             : Calculate average of a column\n");
+    printf(COLOR_YELLOW "  sum <col>" COLOR_RESET "                 : Calculate sum of a column\n");
+    printf(COLOR_YELLOW "  min <col>" COLOR_RESET "                 : Find min value in a column\n");
+    printf(COLOR_YELLOW "  max <col>" COLOR_RESET "                 : Find max value in a column\n");
+    printf(COLOR_YELLOW "  addrow <vals>" COLOR_RESET "             : Add a row (" STYLE_BOLD "val1,val2,..." COLOR_RESET ")\n");
+    printf(COLOR_YELLOW "  addcol <name> <vals>" COLOR_RESET "      : Add a column\n");
+    printf(COLOR_YELLOW "  !help" COLOR_RESET "                     : Show this list\n");
+    printf(COLOR_YELLOW "  exit" COLOR_RESET "                      : Save and quit\n");
+    printf(COLOR_MAGENTA "--------------------------" COLOR_RESET "\n");
+}
+
+void printMenu() {
+    printf("\n" STYLE_BOLD "Select Operation:" COLOR_RESET "\n");
+    printf(COLOR_YELLOW "[1]" COLOR_RESET " Add Row\n");
+    printf(COLOR_YELLOW "[2]" COLOR_RESET " Add Column\n");
+    printf(COLOR_YELLOW "[3]" COLOR_RESET " Average\n");
+    printf(COLOR_YELLOW "[4]" COLOR_RESET " Sum\n");
+    printf(COLOR_YELLOW "[5]" COLOR_RESET " Min\n");
+    printf(COLOR_YELLOW "[6]" COLOR_RESET " Max\n");
+    printf(COLOR_YELLOW "[7]" COLOR_RESET " Help\n");
+    printf(COLOR_RED    "[0] Exit & Save" COLOR_RESET "\n");
+    printf(STYLE_BOLD "\nYour Choice > " COLOR_RESET);
+}
+
+void printSuccess(const char *msg) {
+    printf(COLOR_GREEN "[SUCCESS] %s" COLOR_RESET "\n", msg);
+}
+
+void printError(const char *msg) {
+    printf(COLOR_RED "[ERROR] %s" COLOR_RESET "\n", msg);
+}
