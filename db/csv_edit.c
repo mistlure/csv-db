@@ -11,11 +11,12 @@ void addRow(CSV *db, const char *data)
 {
     if (!data)
     {
-        printf("Error: Missing row data. Usage: addrow val1,val2,...\n");
+        printf("Error: Missing row data. Usage: addrow <val1>,<val2>,...\n");
         return;
     }
 
     size_t count = 0;
+    
     char **newRow = splitLine(data, ",", &count);
 
     if (!newRow)

@@ -97,7 +97,7 @@ int getColumnIndex(const CSV *db, const char *columnName)
             return (int)i;
         }
     }
-    return -1; // Column not found
+    return -1;
 }
 
 double stringToDouble(const char *string)
@@ -112,7 +112,7 @@ double stringToDouble(const char *string)
     // strtod parses a double from a string
     double value = strtod(string, &endptr);
     
-    // If no conversion was performed (string is just text like "abc"), return 0.0
+    // "text" return 0.0
     if (string == endptr) 
     {
         return 0.0;
@@ -148,6 +148,7 @@ void printHelp() {
     printf(COLOR_YELLOW "  addcol <name> <vals>" COLOR_RESET "      : Add a column\n");
     printf(COLOR_YELLOW "  delrow <index>" COLOR_RESET "            : Delete a row by index (0-based)\n");
     printf(COLOR_YELLOW "  !help" COLOR_RESET "                     : Show this list\n");
+    printf(COLOR_YELLOW "  rewrite" COLOR_RESET "                   : Save changes to file without exiting\n");
     printf(COLOR_YELLOW "  exit" COLOR_RESET "                      : Save and quit\n");
     printf(COLOR_MAGENTA "--------------------------" COLOR_RESET "\n");
 }
@@ -162,6 +163,7 @@ void printMenu() {
     printf(COLOR_YELLOW "[6]" COLOR_RESET " Min\n");
     printf(COLOR_YELLOW "[7]" COLOR_RESET " Max\n");
     printf(COLOR_YELLOW "[8]" COLOR_RESET " Help\n");
+    printf(COLOR_GREEN  "[9] Save (Rewrite)" COLOR_RESET "\n");
     printf(COLOR_RED    "[0] Exit & Save" COLOR_RESET "\n");
     printf(STYLE_BOLD "\nYour Choice > " COLOR_RESET);
 }

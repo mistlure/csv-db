@@ -22,6 +22,7 @@ void avgF(const CSV *db, const char *colName)
     }
 
     double sum = 0.0;
+
     for (size_t i = 0; i < db->row_count; i++)
     {
         sum += stringToDouble(db->rows[i][colIdx]);
@@ -33,6 +34,7 @@ void avgF(const CSV *db, const char *colName)
 void sumF(const CSV *db, const char *colName)
 {
     int colIdx = getColumnIndex(db, colName);
+
     if (colIdx < 0)
     {
         fprintf(stderr, "Column '%s' not found.\n", colName);
@@ -40,6 +42,7 @@ void sumF(const CSV *db, const char *colName)
     }
 
     double sum = 0.0;
+    
     for (size_t i = 0; i < db->row_count; i++)
     {
         sum += stringToDouble(db->rows[i][colIdx]);

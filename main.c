@@ -9,35 +9,40 @@
 #include "csv_edit.h"
 #include "csv_help.h"
 
+#define BUFFER 1024
+
 int main(int argc, char **argv)
 {
     ProgramArgs args;
-    if (workArgs(argc, argv, &args) != 0) {
+    if (workArgs(argc, argv, &args) != 0)
+    {
         return 1;
     }
 
     CSV db;
-    if (loadCSVFile(args.input_file, &db) != 0) {
+    if (loadCSVFile(args.input_file, &db) != 0)
+    {
         return 1;
     }
 
-    // Initial setup
     clearScreen();
     printHeader(args.input_file, args.output_file);
     printStats(args.input_file, &db);
 
     int mode = 0;
+
     printf("\n" STYLE_BOLD "Select Mode:" COLOR_RESET "\n");
     printf(COLOR_YELLOW "[1]" COLOR_RESET " Console Mode (Type commands manually)\n");
     printf(COLOR_YELLOW "[2]" COLOR_RESET " Interactive Menu (UI Mode)\n");
     printf("Mode > ");
     
     if (scanf("%d", &mode) != 1) mode = 1; 
+
     while (getchar() != '\n'); // Clear buffer
 
-    char buffer[1024];
-    char argBuf[512];
-    char valBuf[512];
+    char buffer[BUFFER];
+    char argBuf[BUFFER];
+    char valBuf[BUFFER];
 
     if (mode == 1) 
     {
@@ -60,6 +65,17 @@ int main(int argc, char **argv)
             if (strcmp(cmd, "exit") == 0)
             {
                 break;
+            }
+            else if (strcmp(cmd, "rewrite") == 0)
+            {
+                if (saveCSVFile(args.output_file, &db) == 0)
+                {
+                    printf(COLOR_GREEN "File rewritten successfully (%s).\n" COLOR_RESET, args.output_file);
+                }
+                else
+                {
+                    printf(COLOR_RED "Error saving file!\n" COLOR_RESET);
+                }
             }
             else if (strcmp(cmd, "!help") == 0) 
             {
@@ -201,9 +217,17 @@ int main(int argc, char **argv)
                 case 8: // Help
                     printHelp();
                     break;
+                
+                case 9: // Save (Rewrite)
+                    if (saveCSVFile(args.output_file, &db) == 0) {
+                        printSuccess("Database saved successfully.");
+                    } else {
+                        printError("Failed to save database.");
+                    }
+                    break;
 
                 default:
-                    printError("Invalid option. Please try again.");
+                    printError("Invalid option. Try again.");
             }
 
             if(running)
@@ -218,11 +242,11 @@ int main(int argc, char **argv)
     
     if (saveCSVFile(args.output_file, &db) != 0)
     {
-        printError("Failed to save file!");
+        printError("Failed to save file...");
     } 
     else
     {
-        printSuccess("Saved successfully. Goodbye!");
+        printSuccess("Saved successfully...");
     }
 
     freeCSV(&db);
