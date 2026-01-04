@@ -1,3 +1,5 @@
+[github.com/](https://github.com/mistlure/csv-db)
+
 # CSV Database Manager
 
 A lightweight, terminal-based tool written in C for managing and analyzing CSV files. It supports statistical calculations, editing (adding rows/columns), and offers both a console command mode and an interactive UI menu.

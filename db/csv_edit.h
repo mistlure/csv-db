@@ -12,4 +12,8 @@ void addRow(CSV *db, const char *data);
 // 'data' is comma-separated values for each row (e.g. "10,20,30").
 void addCol(CSV *db, const char *colName, const char *data);
 
+// Removes a row at the specified index.
+// Shifts remaining rows to fill the gap.
+void delRow(CSV *db, int index);
+
 #endif

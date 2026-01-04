@@ -106,3 +106,28 @@ void addCol(CSV *db, const char *colName, const char *data)
     db->column_count++;
     printf("Column '%s' added.\n", colName);
 }
+
+void delRow(CSV *db, int index)
+{
+    if (index < 0 || index >= (int)db->row_count)
+    {
+        printf("Error: Index %d is out of bounds (Rows: %zu).\n", index, db->row_count);
+        return;
+    }
+
+    for (size_t i = 0; i < db->column_count; i++)
+    {
+        free(db->rows[index][i]);
+    }
+    free(db->rows[index]);
+
+    // Indexes
+    for (size_t i = index; i < db->row_count - 1; i++)
+    {
+        db->rows[i] = db->rows[i + 1];
+    }
+
+    db->row_count--;
+
+    printf("Row %d deleted.\n", index);
+}

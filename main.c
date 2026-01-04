@@ -57,15 +57,50 @@ int main(int argc, char **argv)
             char *val = strtok(NULL, ""); 
             if (val && *val == ' ') val++;
 
-            if (strcmp(cmd, "exit") == 0) break;
-            else if (strcmp(cmd, "!help") == 0) printHelp();
-            else if (strcmp(cmd, "average") == 0) avgF(&db, arg);
-            else if (strcmp(cmd, "sum") == 0) sumF(&db, arg);
-            else if (strcmp(cmd, "min") == 0) minF(&db, arg);
-            else if (strcmp(cmd, "max") == 0) maxF(&db, arg);
-            else if (strcmp(cmd, "addrow") == 0) addRow(&db, arg);
-            else if (strcmp(cmd, "addcol") == 0) addCol(&db, arg, val);
-            else printf(COLOR_RED "Unknown command '%s'. Try '!help'." COLOR_RESET "\n", cmd);
+            if (strcmp(cmd, "exit") == 0)
+            {
+                break;
+            }
+            else if (strcmp(cmd, "!help") == 0) 
+            {
+                printHelp();
+            }
+            else if (strcmp(cmd, "average") == 0) 
+            {
+                avgF(&db, arg);
+            }
+            else if (strcmp(cmd, "sum") == 0) 
+            {
+                sumF(&db, arg);
+            }
+            else if (strcmp(cmd, "min") == 0) 
+            {
+                minF(&db, arg);
+            }
+            else if (strcmp(cmd, "max") == 0) 
+            {
+                maxF(&db, arg);
+            }
+            else if (strcmp(cmd, "addrow") == 0) 
+            {
+                addRow(&db, arg);
+            }
+            else if (strcmp(cmd, "addcol") == 0) 
+            {
+                addCol(&db, arg, val);
+            }
+            else if (strcmp(cmd, "delrow") == 0)
+            {
+                if (arg)
+                {
+                    delRow(&db, atoi(arg));
+                }
+                else printf(COLOR_RED "Error: Usage: delrow <index>\n" COLOR_RESET);
+            }
+            else 
+            {
+                printf(COLOR_RED "Unknown command '%s'. Try '!help'." COLOR_RESET "\n", cmd);
+            }
         }
     }
     else 
@@ -94,7 +129,8 @@ int main(int argc, char **argv)
 
                 case 1: // Add Row
                     printf("Enter row data (" STYLE_BOLD "comma separated" COLOR_RESET "): ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         addRow(&db, argBuf);
                         printSuccess("Operation attempted."); 
@@ -103,51 +139,66 @@ int main(int argc, char **argv)
 
                 case 2: // Add Col
                     printf("Enter column name: ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         
                         printf("Enter column data (" STYLE_BOLD "comma separated" COLOR_RESET "): ");
-                        if (fgets(valBuf, sizeof(valBuf), stdin)) {
+                        if (fgets(valBuf, sizeof(valBuf), stdin))
+                        {
                             valBuf[strcspn(valBuf, "\n")] = 0;
                             addCol(&db, argBuf, valBuf);
                             printSuccess("Operation attempted.");
                         }
                     }
                     break;
+                
+                case 3: // Delete Row
+                    printf("Enter row index (0 to %zu): ", db.row_count > 0 ? db.row_count - 1 : 0);
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
+                        argBuf[strcspn(argBuf, "\n")] = 0;
+                        delRow(&db, atoi(argBuf));
+                    }
+                    break;
 
-                case 3: // Average
+                case 4: // Average
                     printf("Enter column name: ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         avgF(&db, argBuf);
                     }
                     break;
                 
-                case 4: // Sum
+                case 5: // Sum
                     printf("Enter column name: ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         sumF(&db, argBuf);
                     }
                     break;
 
-                case 5: // Min
+                case 6: // Min
                     printf("Enter column name: ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         minF(&db, argBuf);
                     }
                     break;
 
-                case 6: // Max
+                case 7: // Max
                     printf("Enter column name: ");
-                    if (fgets(argBuf, sizeof(argBuf), stdin)) {
+                    if (fgets(argBuf, sizeof(argBuf), stdin))
+                    {
                         argBuf[strcspn(argBuf, "\n")] = 0;
                         maxF(&db, argBuf);
                     }
                     break;
 
-                case 7: // Help
+                case 8: // Help
                     printHelp();
                     break;
 
@@ -155,7 +206,8 @@ int main(int argc, char **argv)
                     printError("Invalid option. Please try again.");
             }
 
-            if(running) {
+            if(running)
+            {
                 printf("\n" STYLE_BOLD "Press [Enter] to continue..." COLOR_RESET);
                 getchar(); 
             }
@@ -164,9 +216,12 @@ int main(int argc, char **argv)
 
     printf("\n" COLOR_CYAN "Saving database to '%s'..." COLOR_RESET "\n", args.output_file);
     
-    if (saveCSVFile(args.output_file, &db) != 0) {
+    if (saveCSVFile(args.output_file, &db) != 0)
+    {
         printError("Failed to save file!");
-    } else {
+    } 
+    else
+    {
         printSuccess("Saved successfully. Goodbye!");
     }
 

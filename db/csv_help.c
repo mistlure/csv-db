@@ -146,6 +146,7 @@ void printHelp() {
     printf(COLOR_YELLOW "  max <col>" COLOR_RESET "                 : Find max value in a column\n");
     printf(COLOR_YELLOW "  addrow <vals>" COLOR_RESET "             : Add a row (" STYLE_BOLD "val1,val2,..." COLOR_RESET ")\n");
     printf(COLOR_YELLOW "  addcol <name> <vals>" COLOR_RESET "      : Add a column\n");
+    printf(COLOR_YELLOW "  delrow <index>" COLOR_RESET "            : Delete a row by index (0-based)\n");
     printf(COLOR_YELLOW "  !help" COLOR_RESET "                     : Show this list\n");
     printf(COLOR_YELLOW "  exit" COLOR_RESET "                      : Save and quit\n");
     printf(COLOR_MAGENTA "--------------------------" COLOR_RESET "\n");
@@ -155,11 +156,12 @@ void printMenu() {
     printf("\n" STYLE_BOLD "Select Operation:" COLOR_RESET "\n");
     printf(COLOR_YELLOW "[1]" COLOR_RESET " Add Row\n");
     printf(COLOR_YELLOW "[2]" COLOR_RESET " Add Column\n");
-    printf(COLOR_YELLOW "[3]" COLOR_RESET " Average\n");
-    printf(COLOR_YELLOW "[4]" COLOR_RESET " Sum\n");
-    printf(COLOR_YELLOW "[5]" COLOR_RESET " Min\n");
-    printf(COLOR_YELLOW "[6]" COLOR_RESET " Max\n");
-    printf(COLOR_YELLOW "[7]" COLOR_RESET " Help\n");
+    printf(COLOR_YELLOW "[3]" COLOR_RESET " Delete Row\n");
+    printf(COLOR_YELLOW "[4]" COLOR_RESET " Average\n");
+    printf(COLOR_YELLOW "[5]" COLOR_RESET " Sum\n");
+    printf(COLOR_YELLOW "[6]" COLOR_RESET " Min\n");
+    printf(COLOR_YELLOW "[7]" COLOR_RESET " Max\n");
+    printf(COLOR_YELLOW "[8]" COLOR_RESET " Help\n");
     printf(COLOR_RED    "[0] Exit & Save" COLOR_RESET "\n");
     printf(STYLE_BOLD "\nYour Choice > " COLOR_RESET);
 }
