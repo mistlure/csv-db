@@ -45,3 +45,29 @@ void printStats(const char *filename, const CSV *db)
     printf("Columns: %zu\n", db->column_count);
     printf("Rows: %zu\n", db->row_count);
 }
+
+void printRow(const CSV *db, int index)
+{
+    if (index < 0 || index >= (int)db->row_count)
+    {
+        printf("Error: Index %d is out of bounds (Rows: %zu).\n", index, db->row_count);
+        return;
+    }
+
+    for (size_t i = 0; i < db->column_count; i++)
+    {
+        if (i > 0) printf(",");
+
+        char *val = db->rows[index][i];
+        
+        if (!val || *val == '\0') 
+        {
+            printf("NULL");
+        }
+        else 
+        {
+            printf("%s", val);
+        }
+    }
+    printf("\n");
+}

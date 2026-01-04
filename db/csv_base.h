@@ -19,4 +19,7 @@ void freeCSV(CSV *db);
 // Basic information.
 void printStats(const char *filename, const CSV *db);
 
+// Prints a specific row.
+void printRow(const CSV *db, int index);
+
 #endif

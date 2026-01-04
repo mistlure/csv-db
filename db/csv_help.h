@@ -34,8 +34,14 @@ void printHeader(const char *in, const char *out);
 // Prints the help list of commands
 void printHelp();
 
-// Prints the interactive menu options
-void printMenu();
+// Prints the Main Menu (Top level)
+void printMainMenu();
+
+// Prints the Editor Menu (Add/Del/Modify)
+void printEditMenu();
+
+// Prints the Analysis Menu (Math/Stats/Select)
+void printAnalysisMenu();
 
 // Prints a success message in green
 void printSuccess(const char *msg);

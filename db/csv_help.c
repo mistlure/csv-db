@@ -140,6 +140,7 @@ void printHeader(const char *in, const char *out) {
 
 void printHelp() {
     printf("\n" COLOR_MAGENTA "--- AVAILABLE COMMANDS ---" COLOR_RESET "\n");
+    printf(COLOR_YELLOW "  select <index>" COLOR_RESET "            : Show row data\n");
     printf(COLOR_YELLOW "  average <col>" COLOR_RESET "             : Calculate average of a column\n");
     printf(COLOR_YELLOW "  sum <col>" COLOR_RESET "                 : Calculate sum of a column\n");
     printf(COLOR_YELLOW "  min <col>" COLOR_RESET "                 : Find min value in a column\n");
@@ -153,19 +154,37 @@ void printHelp() {
     printf(COLOR_MAGENTA "--------------------------" COLOR_RESET "\n");
 }
 
-void printMenu() {
-    printf("\n" STYLE_BOLD "Select Operation:" COLOR_RESET "\n");
+void printMainMenu()
+{
+    printf("\n" STYLE_BOLD "=== MAIN MENU ===" COLOR_RESET "\n");
+    printf(COLOR_CYAN   "[1]" COLOR_RESET " Editor Mode   (Add/Delete Rows & Cols)\n");
+    printf(COLOR_CYAN   "[2]" COLOR_RESET " Analysis Mode (Math & Data Inspection)\n");
+    printf(COLOR_YELLOW "[3]" COLOR_RESET " Help\n");
+    printf(COLOR_GREEN  "[4]" COLOR_RESET " Save (Rewrite)\n");
+    printf(COLOR_RED    "[0]" COLOR_RESET " Exit & Save\n");
+    printf(STYLE_BOLD "\nSelect Category > " COLOR_RESET);
+}
+
+void printEditMenu()
+{
+    printf("\n" STYLE_BOLD "--- EDITOR MODE ---" COLOR_RESET "\n");
     printf(COLOR_YELLOW "[1]" COLOR_RESET " Add Row\n");
     printf(COLOR_YELLOW "[2]" COLOR_RESET " Add Column\n");
     printf(COLOR_YELLOW "[3]" COLOR_RESET " Delete Row\n");
-    printf(COLOR_YELLOW "[4]" COLOR_RESET " Average\n");
-    printf(COLOR_YELLOW "[5]" COLOR_RESET " Sum\n");
-    printf(COLOR_YELLOW "[6]" COLOR_RESET " Min\n");
-    printf(COLOR_YELLOW "[7]" COLOR_RESET " Max\n");
-    printf(COLOR_YELLOW "[8]" COLOR_RESET " Help\n");
-    printf(COLOR_GREEN  "[9] Save (Rewrite)" COLOR_RESET "\n");
-    printf(COLOR_RED    "[0] Exit & Save" COLOR_RESET "\n");
-    printf(STYLE_BOLD "\nYour Choice > " COLOR_RESET);
+    printf(COLOR_MAGENTA"[0]" COLOR_RESET " << Back to Main Menu\n");
+    printf(STYLE_BOLD "\nEditor Choice > " COLOR_RESET);
+}
+
+void printAnalysisMenu()
+{
+    printf("\n" STYLE_BOLD "--- ANALYSIS MODE ---" COLOR_RESET "\n");
+    printf(COLOR_YELLOW "[1]" COLOR_RESET " Select Row (Show Data)\n");
+    printf(COLOR_YELLOW "[2]" COLOR_RESET " Average\n");
+    printf(COLOR_YELLOW "[3]" COLOR_RESET " Sum\n");
+    printf(COLOR_YELLOW "[4]" COLOR_RESET " Min\n");
+    printf(COLOR_YELLOW "[5]" COLOR_RESET " Max\n");
+    printf(COLOR_MAGENTA"[0]" COLOR_RESET " << Back to Main Menu\n");
+    printf(STYLE_BOLD "\nAnalysis Choice > " COLOR_RESET);
 }
 
 void printSuccess(const char *msg) {
